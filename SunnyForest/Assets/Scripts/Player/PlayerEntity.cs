@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Player
@@ -28,6 +29,12 @@ namespace Player
             _animator.SetFloat("Horizontal", direction.x);
             _animator.SetFloat("Vertical", direction.y);
             _animator.SetFloat("Speed", direction.sqrMagnitude);
+            
+            if (Math.Abs(direction.x) > 0.99 || Math.Abs(direction.y) > 0.99)
+            {
+                _animator.SetFloat("FaceHorizontal", direction.x);
+                _animator.SetFloat("FaceVertical", direction.y);
+            }
         }
     }
 }
