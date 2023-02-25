@@ -32,6 +32,7 @@ SpriteAtlas:
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
+    - {fileID: 2800000, guid: 693cbe3df84d11b43b295f1352356e14, type: 3}
     - {fileID: 2800000, guid: 231196cf474da7849be25c3eb25bbc11, type: 3}
     - {fileID: 2800000, guid: 608c6ff9f2f8a4f4abbc14a788d3563a, type: 3}
     bindAsDefault: 1
@@ -79,6 +80,19 @@ SpriteAtlas:
   - {fileID: -839792767, guid: 608c6ff9f2f8a4f4abbc14a788d3563a, type: 3}
   - {fileID: -1357287548, guid: 608c6ff9f2f8a4f4abbc14a788d3563a, type: 3}
   - {fileID: 33689491, guid: 608c6ff9f2f8a4f4abbc14a788d3563a, type: 3}
+  - {fileID: -1537388237, guid: 693cbe3df84d11b43b295f1352356e14, type: 3}
+  - {fileID: 1348549331, guid: 693cbe3df84d11b43b295f1352356e14, type: 3}
+  - {fileID: -1726970351, guid: 693cbe3df84d11b43b295f1352356e14, type: 3}
+  - {fileID: -1049843821, guid: 693cbe3df84d11b43b295f1352356e14, type: 3}
+  - {fileID: 2033458014, guid: 693cbe3df84d11b43b295f1352356e14, type: 3}
+  - {fileID: -1216699684, guid: 693cbe3df84d11b43b295f1352356e14, type: 3}
+  - {fileID: -198522653, guid: 693cbe3df84d11b43b295f1352356e14, type: 3}
+  - {fileID: 1255982627, guid: 693cbe3df84d11b43b295f1352356e14, type: 3}
+  - {fileID: -1492271452, guid: 693cbe3df84d11b43b295f1352356e14, type: 3}
+  - {fileID: 675615458, guid: 693cbe3df84d11b43b295f1352356e14, type: 3}
+  - {fileID: -750765695, guid: 693cbe3df84d11b43b295f1352356e14, type: 3}
+  - {fileID: -1752822240, guid: 693cbe3df84d11b43b295f1352356e14, type: 3}
+  - {fileID: -1649817054, guid: 693cbe3df84d11b43b295f1352356e14, type: 3}
   - {fileID: 541383071, guid: 231196cf474da7849be25c3eb25bbc11, type: 3}
   - {fileID: -869693653, guid: 231196cf474da7849be25c3eb25bbc11, type: 3}
   - {fileID: 608087948, guid: 231196cf474da7849be25c3eb25bbc11, type: 3}
@@ -148,6 +162,19 @@ SpriteAtlas:
   - GrassNDirt_17
   - GrassNDirt_18
   - GrassNDirt_19
+  - RocksnStumps_11
+  - RocksnStumps_10
+  - RocksnStumps_12
+  - RocksnStumps_8
+  - RocksnStumps_9
+  - RocksnStumps_6
+  - RocksnStumps_7
+  - RocksnStumps_4
+  - RocksnStumps_5
+  - RocksnStumps_2
+  - RocksnStumps_3
+  - RocksnStumps_0
+  - RocksnStumps_1
   - Cliff_11
   - Cliff_10
   - Cliff_13
