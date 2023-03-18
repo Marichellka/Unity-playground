@@ -133,18 +133,14 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 9
-        y: 1
-        width: 61
-        height: 89
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        y: 17
+        width: 62
+        height: 73
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -4.5, y: -41.5}
-        - {x: -2.5, y: -33.5}
-        - {x: 4.5, y: -33.5}
-        - {x: 6.5, y: -41.5}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: addfba38c043b2446aaa58e428357aa3
@@ -158,18 +154,14 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 84
-        y: 1
+        y: 16
         width: 73
-        height: 98
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 83
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -4.5, y: -45}
-        - {x: -1.5, y: -38}
-        - {x: 1.5, y: -38}
-        - {x: 5.5, y: -45}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: cb8bf54936a8d8f4db1c9d0d7c028609
@@ -182,24 +174,94 @@ TextureImporter:
       name: Trees_2
       rect:
         serializedVersion: 2
-        x: 169
-        y: 0
-        width: 32
-        height: 73
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 167
+        y: 15
+        width: 34
+        height: 58
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -8, y: -32.5}
-        - {x: -4, y: -24.5}
-        - {x: 4, y: -24.5}
-        - {x: 7, y: -30.5}
-        - {x: 3, y: -34.5}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 4c641d0527588c041b93f2fb16e985cc
       internalID: -1969007470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trees_3
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 2
+        width: 16
+        height: 15
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1805781}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -5, y: -4.5}
+        - {x: -2, y: 7.5}
+        - {x: 3, y: 6.5}
+        - {x: 6, y: -4.5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: d61a4e9e2e672724aba1b64702a05806
+      internalID: -333290895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trees_4
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 1
+        width: 16
+        height: 15
+      alignment: 9
+      pivot: {x: 0.5000005, y: 0.21815681}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -6, y: -5.5}
+        - {x: -3, y: 7.5}
+        - {x: 3, y: 7.5}
+        - {x: 5, y: -5.5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: baf06381570f75d438f17cde0927b6e6
+      internalID: 31584461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trees_5
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 0
+        width: 22
+        height: 15
+      alignment: 9
+      pivot: {x: 0.48238513, y: 0.27452558}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -4.5}
+        - {x: -5, y: 6.5}
+        - {x: 4, y: 6.5}
+        - {x: 9, y: -4.5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e6821828ac0aab4a84d21e4426f1e42
+      internalID: 961516657
       vertices: []
       indices: 
       edges: []
@@ -217,7 +279,10 @@ TextureImporter:
     nameFileIdTable:
       Trees_2: -1969007470
       Trees_1: 657155137
+      Trees_4: 31584461
       Trees_0: -1169591518
+      Trees_3: -333290895
+      Trees_5: 961516657
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
