@@ -36,5 +36,10 @@ namespace Player
                 _animator.SetFloat("FaceVertical", direction.y);
             }
         }
+
+        public void StartAttack()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
