@@ -39,7 +39,12 @@ namespace Player
 
         public void StartAttack()
         {
-            throw new NotImplementedException();
+            _animator.SetBool("IsAttack", true);
+        }
+
+        public void EndAttack()
+        {
+            _animator.SetBool("IsAttack", false);
         }
     }
 }
