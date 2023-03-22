@@ -36,5 +36,15 @@ namespace Player
                 _animator.SetFloat("FaceVertical", direction.y);
             }
         }
+
+        public void StartAttack()
+        {
+            _animator.SetBool("IsAttack", true);
+        }
+
+        public void EndAttack()
+        {
+            _animator.SetBool("IsAttack", false);
+        }
     }
 }
