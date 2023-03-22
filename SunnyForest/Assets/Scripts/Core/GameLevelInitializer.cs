@@ -12,6 +12,8 @@ namespace Core
         
         private ExternalDevicesInputReader _externalDevicesInput;
         private PlayerBrain _playerBrain;
+
+        private bool _onPause;
         
         private void Awake()
         {
@@ -25,11 +27,17 @@ namespace Core
 
         private void Update()
         {
+            if(_onPause)
+                return;
+            
             _externalDevicesInput.OnUpdate();
         }
 
         private void FixedUpdate()
         {
+            if(_onPause)
+                return;
+            
             _playerBrain.OnFixedUpdate();
         }
     }
