@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Core.InputReader;
+using Core.Services.Updater;
 using Player;
 using UnityEngine;
 
@@ -11,34 +13,33 @@ namespace Core
         [SerializeField] private GameUIInputView _gameUIInputView;
         
         private ExternalDevicesInputReader _externalDevicesInput;
-        private PlayerBrain _playerBrain;
+        private PlayerSystem _playerSystem;
+        private ProjectUpdater _projectUpdater;
 
-        private bool _onPause;
-        
+        private List<IDisposable> _disposables;
+
         private void Awake()
         {
+            if (ProjectUpdater.Instance == null)
+                _projectUpdater = new GameObject().AddComponent<ProjectUpdater>();
+            else
+                _projectUpdater = ProjectUpdater.Instance as ProjectUpdater;
+
+            _disposables = new List<IDisposable>();
             _externalDevicesInput = new ExternalDevicesInputReader();
-            _playerBrain = new PlayerBrain(_playerEntity, new List<IEntityInputSource>()
+            _disposables.Add(_externalDevicesInput);
+
+            _playerSystem = new PlayerSystem(_playerEntity, new List<IEntityInputSource>()
             {
                 _gameUIInputView,
                 _externalDevicesInput
             });
         }
 
-        private void Update()
+        private void OnDestroy()
         {
-            if(_onPause)
-                return;
-            
-            _externalDevicesInput.OnUpdate();
-        }
-
-        private void FixedUpdate()
-        {
-            if(_onPause)
-                return;
-            
-            _playerBrain.OnFixedUpdate();
+            foreach(IDisposable disposable in _disposables)
+                disposable.Dispose();
         }
     }
 }
