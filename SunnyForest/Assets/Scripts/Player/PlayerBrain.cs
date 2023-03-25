@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Core.InputReader;
+using Core.Services.Updater;
 using UnityEngine;
 
 namespace Player
 {
-    public class PlayerBrain
+    public class PlayerBrain : IDisposable
     {
         private readonly PlayerEntity _playerEntity;
         private readonly List<IEntityInputSource> _inputSources;
@@ -14,9 +16,10 @@ namespace Player
         {
             _playerEntity = playerEntity;
             _inputSources = inputSources;
+            ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdate;
         }
 
-        public void OnFixedUpdate()
+        private void OnFixedUpdate()
         {
             _playerEntity.Move(GetDirection());
             if (IsAttack)
@@ -38,5 +41,10 @@ namespace Player
         }
 
         private bool IsAttack => _inputSources.Any(source => source.Attack);
+
+        public void Dispose()
+        {
+            ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdate;
+        }
     }
 }
