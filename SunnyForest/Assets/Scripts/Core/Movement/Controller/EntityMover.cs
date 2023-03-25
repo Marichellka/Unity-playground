@@ -1,4 +1,5 @@
-﻿using Core.Enums;
+﻿using System;
+using Core.Enums;
 using Core.Movement.Data;
 using UnityEngine;
 
@@ -29,14 +30,20 @@ namespace Core.Movement.Controller
 
         private void SetDirection(Vector2 direction)
         {
-            if (direction.y > 0)
-                FaceDirection = Direction.Up;
-            else if (direction.y < 0)
-                FaceDirection = Direction.Down; 
-            else if (direction.x > 0)
-                FaceDirection = Direction.Right;
-            else if (direction.x < 0)
-                FaceDirection = Direction.Left;
+            if (Math.Abs(direction.y) > Math.Abs(direction.x))
+            {
+                if (direction.y > 0)
+                    FaceDirection = Direction.Up;
+                else if (direction.y < 0)
+                    FaceDirection = Direction.Down; 
+            }
+            else
+            {
+                if (direction.x > 0)
+                    FaceDirection = Direction.Right;
+                else if (direction.x < 0)
+                    FaceDirection = Direction.Left;
+            }
         }
     }
 }
