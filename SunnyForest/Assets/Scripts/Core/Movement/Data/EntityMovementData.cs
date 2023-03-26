@@ -7,6 +7,6 @@ namespace Core.Movement.Data
     [Serializable]
     public class EntityMovementData
     {
-        [field: SerializeField] public float MoveSpeed { get; private set; }
+        [field: SerializeField] public Direction Direction { get; protected internal set; }
     }
 }
