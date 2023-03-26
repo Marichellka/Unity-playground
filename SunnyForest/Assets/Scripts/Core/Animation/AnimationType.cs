@@ -1,4 +1,4 @@
-﻿namespace Core.Enums
+﻿namespace Core.Animation
 {
     public enum AnimationType
     {
