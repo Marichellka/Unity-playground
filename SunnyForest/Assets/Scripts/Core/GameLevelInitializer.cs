@@ -20,12 +20,13 @@ namespace Core
 
         private void Awake()
         {
+            _disposables = new List<IDisposable>();
+            
             if (ProjectUpdater.Instance == null)
                 _projectUpdater = new GameObject().AddComponent<ProjectUpdater>();
             else
                 _projectUpdater = ProjectUpdater.Instance as ProjectUpdater;
 
-            _disposables = new List<IDisposable>();
             _externalDevicesInput = new ExternalDevicesInputReader();
             _disposables.Add(_externalDevicesInput);
 
@@ -34,6 +35,7 @@ namespace Core
                 _gameUIInputView,
                 _externalDevicesInput
             });
+            _disposables.Add(_playerSystem);
         }
 
         private void OnDestroy()
