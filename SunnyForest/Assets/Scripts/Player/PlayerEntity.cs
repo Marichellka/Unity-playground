@@ -1,4 +1,4 @@
-using Core.Enums;
+using Core.Animation;
 using Core.Movement.Controller;
 using Core.Movement.Data;
 using StatsSystem;
@@ -11,17 +11,15 @@ namespace Player
     public class PlayerEntity : MonoBehaviour
     {
         [SerializeField] private EntityMovementData _movementData;
+        [SerializeField] private AnimationController _animationController;
 
         private Rigidbody2D _rigidbody;
-        private Animator _animator;
 
         private EntityMover _entityMover;
-        private AnimationType _currentAnimationType;
 
         public void Initialize(IStatValueGiver statValueGiver)
         {
             _rigidbody = GetComponent<Rigidbody2D>();
-            _animator = GetComponent<Animator>();
             _entityMover = new EntityMover(_rigidbody, _movementData, statValueGiver);
         }
 
@@ -37,35 +35,15 @@ namespace Player
 
         private void UpdateAnimations()
         {
-            _animator.SetFloat("Direction", (float)_movementData.Direction);
-            PlayAnimation(AnimationType.Idle, true);
-            PlayAnimation(AnimationType.Walk, _entityMover.IsMoving);
+            _animationController.UpdateDirection((float)_movementData.Direction);
+            _animationController.PlayAnimation(AnimationType.Idle, true);
+            _animationController.PlayAnimation(AnimationType.Walk, _entityMover.IsMoving);
         }
 
         public void StartAttack()
         {
             // TODO: implement attack logic
             return;
-        }
-        
-        private void PlayAnimation(AnimationType animationType, bool isActive)
-        {
-            if (!isActive)
-            {
-                if (_currentAnimationType != AnimationType.Idle && _currentAnimationType == animationType)
-                    _currentAnimationType = AnimationType.Idle;
-            }
-            else if (animationType > _currentAnimationType)
-            {
-                _currentAnimationType = animationType;
-            }
-            
-            PlayAnimation(_currentAnimationType);
-        }
-
-        private void PlayAnimation(AnimationType animationType)
-        {
-            _animator.SetInteger("AnimationType", (int)animationType);
         }
     }
 }
