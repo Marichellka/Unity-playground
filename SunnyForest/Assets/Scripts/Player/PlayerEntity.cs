@@ -1,4 +1,6 @@
-using System;
+using Core.Enums;
+using Core.Movement.Controller;
+using Core.Movement.Data;
 using UnityEngine;
 
 namespace Player
@@ -7,44 +9,62 @@ namespace Player
     [RequireComponent(typeof(Animator))]
     public class PlayerEntity : MonoBehaviour
     {
-        [SerializeField] private float _moveSpeed;
+        [SerializeField] private EntityMovementData _movementData;
 
         private Rigidbody2D _rigidbody;
         private Animator _animator;
+
+        private EntityMover _entityMover;
+        private AnimationType _currentAnimationType;
 
         private void Start()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
             _animator = GetComponent<Animator>();
+            _entityMover = new EntityMover(_rigidbody, _movementData);
+        }
+
+        private void Update()
+        {
+            UpdateAnimations();
         }
 
         public void Move(Vector2 direction)
         {
-            UpdateAnimation(direction);
-            _rigidbody.MovePosition(_rigidbody.position + direction * _moveSpeed * Time.fixedDeltaTime);
+            _entityMover.Move(direction);
         }
 
-        private void UpdateAnimation(Vector2 direction)
+        private void UpdateAnimations()
         {
-            _animator.SetFloat("Horizontal", direction.x);
-            _animator.SetFloat("Vertical", direction.y);
-            _animator.SetFloat("Speed", direction.sqrMagnitude);
-            
-            if (Math.Abs(direction.x) > 0.99 || Math.Abs(direction.y) > 0.99)
-            {
-                _animator.SetFloat("FaceHorizontal", direction.x);
-                _animator.SetFloat("FaceVertical", direction.y);
-            }
+            _animator.SetFloat("Direction", (float)_entityMover.FaceDirection);
+            PlayAnimation(AnimationType.Idle, true);
+            PlayAnimation(AnimationType.Walk, _entityMover.IsMoving);
         }
 
         public void StartAttack()
         {
-            _animator.SetBool("IsAttack", true);
+            // TODO: implement attack logic
+            return;
+        }
+        
+        private void PlayAnimation(AnimationType animationType, bool isActive)
+        {
+            if (!isActive)
+            {
+                if (_currentAnimationType != AnimationType.Idle && _currentAnimationType == animationType)
+                    _currentAnimationType = AnimationType.Idle;
+            }
+            else if (animationType > _currentAnimationType)
+            {
+                _currentAnimationType = animationType;
+            }
+            
+            PlayAnimation(_currentAnimationType);
         }
 
-        public void EndAttack()
+        private void PlayAnimation(AnimationType animationType)
         {
-            _animator.SetBool("IsAttack", false);
+            _animator.SetInteger("AnimationType", (int)animationType);
         }
     }
 }
