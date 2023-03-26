@@ -1,6 +1,7 @@
 using Core.Enums;
 using Core.Movement.Controller;
 using Core.Movement.Data;
+using StatsSystem;
 using UnityEngine;
 
 namespace Player
@@ -17,11 +18,11 @@ namespace Player
         private EntityMover _entityMover;
         private AnimationType _currentAnimationType;
 
-        private void Start()
+        public void Initialize(IStatValueGiver statValueGiver)
         {
             _rigidbody = GetComponent<Rigidbody2D>();
             _animator = GetComponent<Animator>();
-            _entityMover = new EntityMover(_rigidbody, _movementData);
+            _entityMover = new EntityMover(_rigidbody, _movementData, statValueGiver);
         }
 
         private void Update()
@@ -36,7 +37,7 @@ namespace Player
 
         private void UpdateAnimations()
         {
-            _animator.SetFloat("Direction", (float)_entityMover.FaceDirection);
+            _animator.SetFloat("Direction", (float)_movementData.Direction);
             PlayAnimation(AnimationType.Idle, true);
             PlayAnimation(AnimationType.Walk, _entityMover.IsMoving);
         }
