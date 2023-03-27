@@ -13,19 +13,25 @@ namespace Core.Animation
         public event Action ActionRequested;
         public event Action AnimationEnded;
         
-        public void PlayAnimation(AnimationType animationType, bool isActive)
+        public bool PlayAnimation(AnimationType animationType, bool isActive)
         {
             if (!isActive)
             {
                 if (_currentAnimationType != AnimationType.Idle && _currentAnimationType == animationType)
+                {
                     _currentAnimationType = AnimationType.Idle;
+                    PlayAnimation(_currentAnimationType);
+                }
+
+                return false;
             }
-            else if (animationType > _currentAnimationType)
-            {
-                _currentAnimationType = animationType;
-            }
+
+            if (animationType <= _currentAnimationType)
+                return false;
             
+            _currentAnimationType = animationType;
             PlayAnimation(_currentAnimationType);
+            return true;
         }
         
         private void PlayAnimation(AnimationType animationType)
