@@ -1,4 +1,7 @@
-using System;
+using Core.Animation;
+using Core.Movement.Controller;
+using Core.Movement.Data;
+using StatsSystem;
 using UnityEngine;
 
 namespace Player
@@ -7,44 +10,58 @@ namespace Player
     [RequireComponent(typeof(Animator))]
     public class PlayerEntity : MonoBehaviour
     {
-        [SerializeField] private float _moveSpeed;
+        [SerializeField] private EntityMovementData _movementData;
+        [SerializeField] private AnimationController _animationController;
 
         private Rigidbody2D _rigidbody;
-        private Animator _animator;
+        private EntityMover _entityMover;
+        private bool _isAttack;
 
-        private void Start()
+        public void Initialize(IStatValueGiver statValueGiver)
         {
             _rigidbody = GetComponent<Rigidbody2D>();
-            _animator = GetComponent<Animator>();
+            _entityMover = new EntityMover(_rigidbody, _movementData, statValueGiver);
+        }
+
+        private void Update()
+        {
+            UpdateAnimations();
         }
 
         public void Move(Vector2 direction)
         {
-            UpdateAnimation(direction);
-            _rigidbody.MovePosition(_rigidbody.position + direction * _moveSpeed * Time.fixedDeltaTime);
+            _entityMover.Move(direction);
         }
 
-        private void UpdateAnimation(Vector2 direction)
+        private void UpdateAnimations()
         {
-            _animator.SetFloat("Horizontal", direction.x);
-            _animator.SetFloat("Vertical", direction.y);
-            _animator.SetFloat("Speed", direction.sqrMagnitude);
-            
-            if (Math.Abs(direction.x) > 0.99 || Math.Abs(direction.y) > 0.99)
-            {
-                _animator.SetFloat("FaceHorizontal", direction.x);
-                _animator.SetFloat("FaceVertical", direction.y);
-            }
+            _animationController.UpdateDirection((float)_movementData.Direction);
+            _animationController.PlayAnimation(AnimationType.Idle, true);
+            _animationController.PlayAnimation(AnimationType.Walk, _entityMover.IsMoving);
+            _animationController.PlayAnimation(AnimationType.Attack, _isAttack);
         }
 
         public void StartAttack()
         {
-            _animator.SetBool("IsAttack", true);
+            _isAttack = true;
+            if (!_animationController.PlayAnimation(AnimationType.Attack, _isAttack))
+                return;
+
+            _animationController.ActionRequested += Attack;
+            _animationController.AnimationEnded += EndAttack;
         }
 
-        public void EndAttack()
+        private void Attack()
         {
-            _animator.SetBool("IsAttack", false);
+            Debug.Log("Attack");
+        }
+
+        private void EndAttack()
+        {
+            _animationController.ActionRequested -= Attack;
+            _animationController.AnimationEnded -= EndAttack;
+            _isAttack = false;
+            _animationController.PlayAnimation(AnimationType.Attack, _isAttack);
         }
     }
 }

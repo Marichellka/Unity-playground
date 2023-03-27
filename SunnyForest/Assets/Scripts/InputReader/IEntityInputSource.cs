@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Player
+namespace Core.InputReader
 {
     public interface IEntityInputSource
     {
