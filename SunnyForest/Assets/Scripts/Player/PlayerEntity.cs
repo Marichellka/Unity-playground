@@ -42,8 +42,23 @@ namespace Player
 
         public void StartAttack()
         {
-            // TODO: implement attack logic
-            return;
+            if (!_animationController.PlayAnimation(AnimationType.Attack, true))
+                return;
+
+            _animationController.ActionRequested += Attack;
+            _animationController.AnimationEnded += EndAttack;
+        }
+
+        private void Attack()
+        {
+            Debug.Log("Attack");
+        }
+
+        private void EndAttack()
+        {
+            _animationController.ActionRequested -= Attack;
+            _animationController.AnimationEnded -= EndAttack;
+            _animationController.PlayAnimation(AnimationType.Attack, false);
         }
     }
 }
