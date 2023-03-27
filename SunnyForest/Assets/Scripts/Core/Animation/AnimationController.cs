@@ -1,4 +1,5 @@
-﻿using Core.Enums;
+﻿using System;
+using Core.Enums;
 using UnityEngine;
 
 namespace Core.Animation
@@ -8,6 +9,9 @@ namespace Core.Animation
         [SerializeField] private Animator _animator;
 
         private AnimationType _currentAnimationType;
+
+        public event Action ActionRequested;
+        public event Action AnimationEnded;
         
         public void PlayAnimation(AnimationType animationType, bool isActive)
         {
@@ -33,6 +37,10 @@ namespace Core.Animation
         {
             _animator.SetFloat("Direction", value);
         }
+
+        protected void OnActionRequested() => ActionRequested?.Invoke();
+
+        protected void OnAnimationEnded() => AnimationEnded?.Invoke();
 
     }
 }
