@@ -14,8 +14,8 @@ namespace Player
         [SerializeField] private AnimationController _animationController;
 
         private Rigidbody2D _rigidbody;
-
         private EntityMover _entityMover;
+        private bool _isAttack;
 
         public void Initialize(IStatValueGiver statValueGiver)
         {
@@ -38,11 +38,13 @@ namespace Player
             _animationController.UpdateDirection((float)_movementData.Direction);
             _animationController.PlayAnimation(AnimationType.Idle, true);
             _animationController.PlayAnimation(AnimationType.Walk, _entityMover.IsMoving);
+            _animationController.PlayAnimation(AnimationType.Attack, _isAttack);
         }
 
         public void StartAttack()
         {
-            if (!_animationController.PlayAnimation(AnimationType.Attack, true))
+            _isAttack = true;
+            if (!_animationController.PlayAnimation(AnimationType.Attack, _isAttack))
                 return;
 
             _animationController.ActionRequested += Attack;
@@ -58,7 +60,8 @@ namespace Player
         {
             _animationController.ActionRequested -= Attack;
             _animationController.AnimationEnded -= EndAttack;
-            _animationController.PlayAnimation(AnimationType.Attack, false);
+            _isAttack = false;
+            _animationController.PlayAnimation(AnimationType.Attack, _isAttack);
         }
     }
 }
